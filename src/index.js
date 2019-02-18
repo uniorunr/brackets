@@ -1,12 +1,13 @@
 module.exports = function check(str, bracketsConfig) {
-  const stack = [];
+  const stack = [...str[0]];
   const openingBr = [];
   const closingBr = [];
-  bracketsConfig.map(item => {     // creating arrays of opening and closing brackets
+
+  bracketsConfig.map(item => {  // creating arrays of opening and closing brackets
     openingBr.push(item[0]);
     closingBr.push(item[1]);
   });
-  stack.push(str[0]);      // setting the first element of the stack
+
   for (let i = 1; i < str.length; i++) {      // checking of every char in string
     let last = stack[stack.length - 1];
     if (last === str[i] && 
@@ -18,6 +19,7 @@ module.exports = function check(str, bracketsConfig) {
       stack.pop();      // removing the last element from the stack if brackets are balanced
     } else return false;
   }
+  
   if (!stack.length) {      // checking the length of the stack
     return true;
   } return false;
